@@ -9,6 +9,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DocumentData", "DocumentDat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentsDesktopUI", "DocumentsDesktopUI\DocumentsDesktopUI.csproj", "{87EAAF19-3497-4950-923D-D1B834E29E7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocuDataManager.Library", "DocuDataManager.Library\DocuDataManager.Library.csproj", "{9B93108A-915F-495E-9923-B73A80E7367F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{87EAAF19-3497-4950-923D-D1B834E29E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87EAAF19-3497-4950-923D-D1B834E29E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87EAAF19-3497-4950-923D-D1B834E29E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B93108A-915F-495E-9923-B73A80E7367F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B93108A-915F-495E-9923-B73A80E7367F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B93108A-915F-495E-9923-B73A80E7367F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B93108A-915F-495E-9923-B73A80E7367F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
