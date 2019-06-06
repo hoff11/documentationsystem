@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using DocumentsDesktopUI.Helpers;
+using DocumentsDesktopUI.Library.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +83,10 @@ namespace DocumentsDesktopUI.ViewModels
             {
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                //capture more info about user
+                await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+
             }
             catch (Exception ex)
             {
