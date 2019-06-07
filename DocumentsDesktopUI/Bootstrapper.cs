@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using DocumentsDesktopUI.Helpers;
 using DocumentsDesktopUI.Library.Api;
+using DocumentsDesktopUI.Library.Helpers;
 using DocumentsDesktopUI.Library.Models;
 using DocumentsDesktopUI.ViewModels;
 using System;
@@ -33,6 +34,7 @@ namespace DocumentsDesktopUI
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ILoggedInUserModel,LoggedInUserModel>()
+                .Singleton<IConfigHelper, ConfigHelper>()
                 .Singleton<IAPIHelper, APIHelper>();
 
             GetType().Assembly.GetTypes()

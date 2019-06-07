@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using DocumentsDesktopUI.Library.Api;
+using DocumentsDesktopUI.Library.Helpers;
 using DocumentsDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace DocumentsDesktopUI.ViewModels
     public class SalesViewModel : Screen
     {
         IProductEndpoint _productEndpoint;
+        IConfigHelper _configHelper;
 
         public SalesViewModel(IProductEndpoint productEndpoint)
         {
             _productEndpoint = productEndpoint;
+            _configHelper = configHelper;
         }
 
         protected override async void OnViewLoaded(object view)
@@ -101,8 +104,16 @@ namespace DocumentsDesktopUI.ViewModels
         {
             get
             {
-                //replace with calculation
-                return "$0.00";
+                decimal taxAmount = 0;
+                decimal taxRate = _configHelper.GetTaxRate();
+                foreach (var item in Cart)
+                {
+                    if (item.Product.IsTaxable)
+                    {
+                        taxAmount += (item.Product.RetailPrice * item.QuantityInCart * taxRate);
+                    }
+                }
+                return taxAmount.ToString("C");
             }
         }
 
