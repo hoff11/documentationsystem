@@ -15,27 +15,22 @@ namespace DocumentsDesktopUI.ViewModels
     {
         IProductEndpoint _productEndpoint;
         IConfigHelper _configHelper;
-
         public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper)
         {
             _productEndpoint = productEndpoint;
             _configHelper = configHelper;
         }
-
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
             await LoadProducts();
         }
-
         private async Task LoadProducts()
         {
             var productsList = await _productEndpoint.GetAll();
             Products = new BindingList<ProductModel>(productsList);
         }
-
         private BindingList<ProductModel> _products;
-
         public BindingList<ProductModel> Products
         {
             get { return _products; }
@@ -45,9 +40,7 @@ namespace DocumentsDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Products);
             }
         }
-
         private ProductModel _selectedProduct;
-
         public ProductModel SelectedProduct
         {
             get { return _selectedProduct; }
@@ -58,10 +51,7 @@ namespace DocumentsDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
-
-
-        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();                  
-
+        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();               
         public BindingList<CartItemModel> Cart
         {
             get { return _cart; }
@@ -71,10 +61,7 @@ namespace DocumentsDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Cart);
             }
         }
-
-
         private int _itemQuantity = 1;
-
         public int ItemQuantity
         {   
             get { return _itemQuantity; }
@@ -85,7 +72,6 @@ namespace DocumentsDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => CanAddToCart);                
             }
         }
-
         public string SubTotal
         {
             get
@@ -93,7 +79,6 @@ namespace DocumentsDesktopUI.ViewModels
                 return CalculateSubTotal().ToString("C");
             }            
         }
-
         private decimal CalculateSubTotal()
         {
             decimal subTotal = 0;
@@ -103,7 +88,6 @@ namespace DocumentsDesktopUI.ViewModels
             }
             return subTotal;
         }
-
         private decimal CalculateTax()
         {
             decimal taxAmount = 0;
@@ -117,7 +101,6 @@ namespace DocumentsDesktopUI.ViewModels
             }
             return taxAmount;
         }
-
         public string Tax
         {
             get
@@ -125,8 +108,6 @@ namespace DocumentsDesktopUI.ViewModels
                 return CalculateTax().ToString("C");
             }
         }
-
-
         public string Total
         {
             get
@@ -135,7 +116,6 @@ namespace DocumentsDesktopUI.ViewModels
                 return total.ToString("C");
             }
         }
-
         public bool CanAddToCart
         {
             get
@@ -151,7 +131,6 @@ namespace DocumentsDesktopUI.ViewModels
                 return output;
             }
         }
-
         public void AddToCart()
         {
             CartItemModel existingItem = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
@@ -179,7 +158,6 @@ namespace DocumentsDesktopUI.ViewModels
             NotifyOfPropertyChange(() => Total);
 
         }
-
         public bool CanRemoveFromCart
         {
             get
@@ -190,7 +168,6 @@ namespace DocumentsDesktopUI.ViewModels
                 return output;
             }
         }
-
         public void RemoveFromCart()
         {
 
@@ -198,7 +175,6 @@ namespace DocumentsDesktopUI.ViewModels
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
         }
-
         public bool CanCheckOut
         {
             get
@@ -209,7 +185,6 @@ namespace DocumentsDesktopUI.ViewModels
                 return output;
             }
         }
-
         public void CheckOut()
         {
 
