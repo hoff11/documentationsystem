@@ -11,8 +11,8 @@ namespace DocumentsDesktopUI.ViewModels
 {
     public class LoginViewModel : Screen
     {
-        public string _userName;
-        public string _password;
+        public string _userName = "micah@example.com";
+        public string _password = "Test_11";
         private IAPIHelper _apiHelper;
         private IEventAggregator _events;
 

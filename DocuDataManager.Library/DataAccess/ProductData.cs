@@ -18,5 +18,13 @@ namespace DocuDataManager.Library.DataAccess
 
             return output;
         }
+        public ProductModel GetProductById(int productId)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var output = sql.LoadData<ProductModel, dynamic>("dbo.spProductLookup_GetById", new { Id = productId}, "DocuData").FirstOrDefault();
+
+            return output;
+        }
     }
 }

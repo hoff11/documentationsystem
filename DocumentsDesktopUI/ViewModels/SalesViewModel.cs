@@ -15,9 +15,11 @@ namespace DocumentsDesktopUI.ViewModels
     {
         IProductEndpoint _productEndpoint;
         IConfigHelper _configHelper;
-        public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper)
+        ISaleEndPoint _saleEndPoint;
+        public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper, ISaleEndPoint saleEndPoint)
         {
             _productEndpoint = productEndpoint;
+            _saleEndPoint = saleEndPoint;
             _configHelper = configHelper;
         }
         protected override async void OnViewLoaded(object view)
@@ -160,6 +162,7 @@ namespace DocumentsDesktopUI.ViewModels
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
 
         }
         public bool CanRemoveFromCart
@@ -178,20 +181,35 @@ namespace DocumentsDesktopUI.ViewModels
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
         }
         public bool CanCheckOut
         {
             get
             {
                 bool output = false;
-                //make sure something is in the cart
 
+                //make sure something is in the cart
+                if (Cart.Count > 0)
+                {
+                    output = true; 
+                }
                 return output;
             }
         }
-        public void CheckOut()
+        public async Task CheckOut()
         {
+            SaleModel sale = new SaleModel();
+            foreach (var item in Cart)
+            {
+                sale.SaleDetails.Add(new SaleDetailModel
+                {
+                    ProductId = item.Product.Id,
+                    Quantity = item.QuantityInCart
+                });
+            }
 
+            await _saleEndPoint.PostSale(sale);
         }
     }
 }
